@@ -1,5 +1,5 @@
 export default interface ProgramInterface {
-  name: String;
-  description: String;
-  version?: String;
+  name: string;
+  description: string;
+  version?: string;
 }

@@ -1,7 +1,9 @@
 import OptionsInterface from './OptionsInterface';
+import ArgumentsInterface from './ArgumentsInterface';
 
 export default interface CommandInterface {
-  name: String;
-  description: String;
+  name: string;
+  description: string;
+  arguments?: Array<ArgumentsInterface>;
   options?: Array<OptionsInterface>;
 }

@@ -29,11 +29,12 @@ npm install
 # compile the TypeScript files into JavaScript
 # see package.json and tsconfig.json for details
 npm run build
+# run the main function using node JS
 # see usage instructions and options for this program
-npm run help
+node ./src/Main.js convert help
 # run as an ARM assembler for machine code conversion
 # supply the ARM assembly instruction as a string
-npm run -a -i "mov r1, r2"
+node ./src/Main.js convert -i "mov r1, r2"
 ```
 
 ## Testing

@@ -1,6 +1,6 @@
 export default interface OptionsInterface {
-  name: String;
-  flags: Array<String>;
-  description: String;
+  name: string;
+  flags: Array<string>;
+  description: string;
   required: Boolean;
 }

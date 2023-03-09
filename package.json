@@ -6,7 +6,6 @@
   "scripts": {
     "build": "tsc ./src/*.ts",
     "help": "node ./src/Main.js help",
-    "convert": "node ./src/Main.js convert",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "justinthelaw",

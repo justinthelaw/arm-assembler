@@ -1,34 +1,42 @@
 import HandleUserInput from "./HandleUserInput";
-import ArgumentsInterface from "./OptionsInterface";
+import OptionsInterface from "./OptionsInterface";
 import ProgramInterface from "./ProgramInterface";
-import CommandInterface from './CommandInterface';
+import CommandInterface from "./CommandInterface";
 
-// object for storing program attributes
-const PROGRAM: ProgramInterface = {
-  name: "arm-assembler",
-  description: "ARM assembler and disassembler",
-  version: "0.0.0.0"
-}
-
-// object for storing command attributes
-const COMMAND: CommandInterface = {
-  name: "convert",
-  description: "Assemble or disassemble ARM assembly instructions",
-}
-
-// object for storing options for the program
-const OPTIONS: ArgumentsInterface[] = [
-  // generate the ARM assembly instruction option
+// object for storing options for the command
+const OPTIONS: OptionsInterface[] = [
+  // generate the ARM assembly instruction conversion option
   {
-    name: "instruction",
-    flags: ["i", "instruction"],
+    name: "arm assembly instruction",
+    flags: ["-i", "--instruction"],
+    description: "flag prior to inputting ARM assembly instruction",
+    required: false,
+  },
+  // generate the Mmachine code conversion option
+  {
+    name: "machine code",
+    flags: ["-m", "--machine-code"],
+    description: "flag prior to inputting machine code.",
+    required: false,
+  },
+];
+// object for storing the commands in the program
+const COMMANDS: CommandInterface[] = [
+  {
+    name: "convert",
     description:
-      "An ARM assembly instruction that has been properly\
-       formatted, following the assumptions, examples, \
-       and guidelines listed in the README.",
-    required: true,
+      "assemble or disassemble ARM assembly instructions and associated machine codes",
+    options: OPTIONS,
   },
 ];
 
-// instantiate the user input handler with options
-const input = new HandleUserInput(OPTIONS);
+// object for storing program attributes
+const PROGRAM: ProgramInterface = {
+  name: "node ./src/Main.js",
+  description: "ARM assembler and disassembler",
+  version: "0.0.0.0",
+};
+
+// instantiate the user input handler for use
+const handler = new HandleUserInput(PROGRAM, COMMANDS);
+handler.parseUserInput();

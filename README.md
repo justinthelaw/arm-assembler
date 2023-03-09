@@ -3,6 +3,7 @@
 This is a mock ARM instruction assembler written in TypeScript. This exercise serves as a method to increase my understanding of the ARM assembly language and the mechanics of creating executable machine code for the CPU.
 
 ## Assumptions
+
 - The provided ARM assembly language instruction is correctly formatted and written
 - The ARM assembly instruction is a Data Processing or Load/Store operation of the following types:
   - AND, EOR, ORR
@@ -11,20 +12,24 @@ This is a mock ARM instruction assembler written in TypeScript. This exercise se
   - MUL, MLA
 
 ## Design
+
 - TypeScript was chosen as a way to practice using the syntax of the language for my own professional development, although I could have comfortably done this in Java or Kotlin
 - One class is generated and methods from the class are used to accomplish different steps related to each ARM assembly instruction set
 - Most of the rules are implemented as key-value pair objects for easy switch-based referencing
+- Command line arguments are parsed using a library
 
 ## Usage
+
 This is a command-line tool that takes in a String argument that contains an ARM assembly language instruction. To run the program, execute the following in your command-line:
 
 ```bash
+# install all required npm packages
+npm install
 # compile the TypeScript files into JavaScript
 # see package.json for command details
-npm build
-# use node.js to run the file
+npm run build
 # supply the ARM assembly instruction as a string
-node armAssembler.js "mov r1, r2"
+npm run assemble "mov r1, r2"
 ```
 
 ## Testing

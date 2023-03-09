@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc ./src/*.ts",
-    "assemble": "node ./src/*.js --instruction",
+    "help": "node ./src/Main.js help",
+    "convert": "node ./src/Main.js convert",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "justinthelaw",

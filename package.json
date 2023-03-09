@@ -4,12 +4,14 @@
   "description": "Mock ARM assembly instruction to machine code translator",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
+    "build": "npx tsc ./src/*.ts",
+    "assemble": "node ./src/*.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "justinthelaw",
   "license": "MIT",
   "dependencies": {
+    "typescript": "^4.9.5",
     "yargs": "^17.7.1"
   }
 }

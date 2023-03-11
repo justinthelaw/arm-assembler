@@ -9,7 +9,7 @@ This is a mock ARM instruction assembler written in TypeScript. This exercise se
 - The ARM assembly instruction is a Data Processing or Load/Store operation of the following types:
   - AND, EOR, ORR
   - ADD, SUB
-  - RSB, MOV, MVN, LSL, LSR, ASR, ROR, RRX
+  - RSB, MOV, MVN, LSL, LSR, ASR, ROR
   - MUL, MLA
 
 ## Design
@@ -35,6 +35,11 @@ node ./src/Main.js convert help
 # run as an ARM assembler for machine code conversion
 # supply the ARM assembly instruction as a string
 node ./src/Main.js convert -i "mov r1, r2"
+```
+
+If you want a hot-reload dev environment, you can execute the following instead:
+```bash
+npm run dev
 ```
 
 ## Testing

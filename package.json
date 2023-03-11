@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc ./src/*.ts",
+    "dev": "tsc ./src/*.ts -w",
     "help": "node ./src/Main.js help",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

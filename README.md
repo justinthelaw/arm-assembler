@@ -1,4 +1,4 @@
-# Arm Assembler
+# ARM Instruction Assembler
 
 This is a mock ARM instruction assembler written in TypeScript. This exercise serves as a method to increase my understanding of the ARM assembly language and the mechanics of creating executable machine code for the CPU.
 
@@ -11,13 +11,17 @@ This is a mock ARM instruction assembler written in TypeScript. This exercise se
   - ADD, SUB
   - RSB, MOV, MVN, LSL, LSR, ASR, ROR
   - MUL, MLA
+  - LDR, STR
+- Only certain codes from class are applied, like conditions (1110) and S-flag (0)
+- Instructions will not exceeding 4 terms
+- See [Testing](#testing) section for examples of properly formatted instructions that fall within these assumptions
 
 ## Design
 
 - TypeScript was chosen as a way to practice using the syntax of the language for my own professional development, although I could have comfortably done this in Java or Kotlin
-- Each class handles a different aspect of the ARM Assembly conversion to machine code, to include operations like user input handling and binary to hexadecimal conversions
+- Each class/function file handles a different aspect of the ARM Assembly conversion to machine code, to include operations like user input handling and binary to hexadecimal conversions
 - Most of the rules are implemented as key-value pair objects for easy switch-based referencing
-- Command line arguments are parsed using a library
+- Command line arguments are parsed using a library named commander.js
 
 ## Usage
 
@@ -44,7 +48,7 @@ npm run dev
 
 ## Testing
 
-The following ARM assembly instruction-machine code pairs will be used as test cases for verifying the performance of this program:
+The following ARM assembly instruction-machine code pairs are used as test cases for verifying this program's performance:
 
 ```text
 e1a01002 mov r1, r2
@@ -60,4 +64,4 @@ e7821003 str r1, [r2, r3]
 ```
 ## Disclaimer
 
-The current program cannot perform machine code to ARM assembly instruction conversion (disassembly), and therefore the `-m --machine-code <string>` options are stubs and will only echo the user-input option.
+The current program cannot perform machine code to ARM assembly instruction conversion (disassembly) yet; therefore, the `-m --machine-code <string>` options are stubs and will only echo the user-input option.

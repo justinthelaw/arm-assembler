@@ -2,13 +2,14 @@ import HandleUserInput from "./HandleUserInput";
 import OptionsInterface from "./OptionsInterface";
 import ProgramInterface from "./ProgramInterface";
 import CommandInterface from "./CommandInterface";
-import InstructionConversion from "./InstructionConversion";
+import InstructionConversion, { ERROR } from "./InstructionConversion";
 
 // some console welcome messages
-console.log("\nWelcome to the mock ARM Assembly and Disassembly Program!\n");
-console.log("=> Written by Justin Law (https://www.github.com/justinthelaw)\n");
+console.log("\nWelcome to the mock ARM Assembly and Disassembly Program!");
+console.log("Written by Justin Law (https://www.github.com/justinthelaw)\n");
+console.log("=> PROGRAM MESSAGES START BELOW");
 
-const FLAGS = ["i", "instruction", "m", "machine-code"];
+const FLAGS = ["i", "instruction", "m", "machineCode"];
 
 // object for storing options for the command
 const OPTIONS: OptionsInterface[] = [
@@ -52,21 +53,24 @@ const inputObject = handler.parseUserInput();
 // provide stub response (not built yet)
 if (inputObject[FLAGS[2]] || inputObject[FLAGS[3]]) {
   console.log(
-    `=> This is a stub response, as "${FLAGS[2]}" and "${FLAGS[3]}" \
-    are not built yet. Machine code to ARM assembly instruction is \
-    still under construction.`
+    `=> This is a stub response, as "-${FLAGS[2]}" and "-${FLAGS[3]}" are not built yet`
   );
-// if assembly (ARM instruction to machine code)
-// complete the conversion and output resulting message
+  // if assembly (ARM instruction to machine code)
+  // complete the conversion and output resulting message
 } else if (inputObject[FLAGS[0]] || inputObject[FLAGS[1]]) {
   // get ARM instruction from the input response object
-  const instruction = (inputObject[FLAGS[0]] || inputObject[FLAGS[1]]).toUpperCase();
-  console.log(`\n=> The result of the conversion to machine code is:\n\t${InstructionConversion(instruction)}\n`);
-// if none of the above, output error and end
-} else {
+  const instruction = (
+    inputObject[FLAGS[0]] || inputObject[FLAGS[1]]
+  ).toUpperCase();
+  // print out result from conversion, or error
   console.log(
-    "=> Something went wrong! Please check your inputted code, or \
-    this program's source code."
+    `=> Resulting machine code:\n\t${
+      InstructionConversion(instruction) || ERROR
+    }`
   );
+  // if none of the above, output error and end
+} else {
+  throw new Error(ERROR);
 }
-console.log(`=> Thank you for using ARM assembler and disassembler!\n`)
+console.log(`\nThank you for using the mock ARM Assembly and Disassembly Program!`);
+console.log("Written by Justin Law (https://www.github.com/justinthelaw)\n");

@@ -45,9 +45,9 @@ export default class HandleUserInput {
   }
 
   // takes in user arguments and produces useable output
-  parseUserInput() {
+  parseUserInput(): any {
     // parse the process arguments using constructed program
     const result = program.parse(process.argv);
-    console.log(result.opts());
+    return result.opts();
   }
 }

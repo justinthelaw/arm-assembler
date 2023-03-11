@@ -53,3 +53,6 @@ e5921000 ldr r1, [r2]
 e5902004 ldr r2, [r0, #4]
 e7821003 str r1, [r2, r3]
 ```
+## Disclaimer
+
+The current program cannot perform machine code to ARM assembly instruction conversion (disassembly), and therefore the `-m --machine-code <string>` options are stubs and will only echo the user-input option.

@@ -41,8 +41,10 @@ node ./src/Main.js convert help
 node ./src/Main.js convert -i "mov r1, r2"
 ```
 
-If you want a hot-reload dev environment, you can execute the following instead:
+If you want a hot-reload dev environment, you can execute the following instead of `npm run build`:
 ```bash
+# compile the TypeScript files into JavaScript
+# adds watch mode option for live change reloads/builds
 npm run dev
 ```
 

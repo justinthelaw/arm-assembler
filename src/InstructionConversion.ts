@@ -1,9 +1,15 @@
+import {
+  validOperations,
+  validRegisters,
+  opMachineCodes,
+} from "./ConstantsRules";
+
 // default error message for incorrect input
 // may accidentally hide program edge case errors too haha
 export const ERROR = "User input is incorrect!";
 
 // stores operation
-let op = "";
+let opCode = "";
 // stores the destination register
 let destReg = "";
 // stores source registers
@@ -19,56 +25,29 @@ export default function InstructionConversion(instruction: string): string {
   }
 
   let result = "";
-  // adds the op code
-  const opCode = instruction.substring(0, 3);
-  // TODO: complete the op and type check
-  const opCodeAndType = checkOpAndTypeCode(opCode);
+  // adds Cond Code, Op Type, Op Code, and S or L/S code
+  result += checkOpAndTypeCode();
 
   return result;
 }
 
-function checkOpAndTypeCode(code: string): string {
+function checkOpAndTypeCode(): string {
   // adds the 0b prefix and condition code
   // always defaults to assumption of 0b1110
-  const withCond = "0b1110";
+  let result = "0b1110";
 
-  // TODO: complete determination based on srcRegs
-  const withReg = "000";
-  const withImm = "001";
-
-  switch (code) {
-    case "AND": // includes S
-      return withCond + "0000";
-    case "EOR": // includes S
-      return withCond + "0001";
-    case "ORR": // includes S
-      return withCond + "1100";
-    case "ADD": // includes S
-      return withCond + "0100";
-    case "SUB": // includes S
-      return withCond + "0010";
-    case "LSL": // all the same
-    case "LSR": // all the same
-    case "ASR": // all the same
-    case "ROR": // all the same
-      return withCond + "1101";
-    case "RSB":
-      return "0011";
-    case "MOV":
-      return "1101";
-    case "MVN":
-      return "1111";
-    case "MUL": // includes A and S
-      return withCond + "00000000";
-    case "MLA":
-      return withCond + "00000010";
-    case "LDR":
-      return withCond + "0101";
-    case "STR":
-      return withCond + "0111";
-    default:
-      throw new Error(ERROR);
+  // check if LDR/STR uses immediate or register
+  if (opCode === "LDR" || opCode === "STR") {
+    if (srcRegs.includes("#")) {
+      result += "010";
+    } else {
+      result += "011";
+    }
   }
+
+  result += opMachineCodes.get(opCode);
+
+  return result;
 }
 
 // takes in an all uppercase string and determines if it is
@@ -79,26 +58,8 @@ function isArmInstruction(instruction: string): boolean {
   const parts = instruction.trim().split(/\s+/);
 
   // Check that the first part is a valid operation
-  op = parts[0];
-  const validOperations = [
-    "AND",
-    "EOR",
-    "ORR",
-    "ADD",
-    "SUB",
-    "RSB",
-    "MOV",
-    "MVN",
-    "LSL",
-    "LSR",
-    "ASR",
-    "ROR",
-    "MUL",
-    "MLA",
-    "STR",
-    "LDR",
-  ];
-  if (!validOperations.includes(op)) {
+  opCode = parts[0];
+  if (!validOperations.includes(opCode)) {
     return false;
   }
 
@@ -106,23 +67,6 @@ function isArmInstruction(instruction: string): boolean {
   if (parts.length < 2) {
     return false;
   }
-
-  // Check that all register operands are valid
-  const validRegisters = [
-    "R0",
-    "R1",
-    "R2",
-    "R3",
-    "R4",
-    "R5",
-    "R6",
-    "R7",
-    "R8",
-    "R9",
-    "R10",
-    "R11",
-    "R12",
-  ];
 
   // first register identified in the instruction
   destReg = parts[1].substring(0, 2);
@@ -146,14 +90,18 @@ function isArmInstruction(instruction: string): boolean {
     i++; // move on to next term
   }
 
+  // message to the user as a potential debug step
+  // shows the parsed operation, registers, and/or immediate
   console.log("=> Program has parsed out the following:");
   console.log(
-    `\tOperation: ${op}\n\tDestination Register: ${destReg}\n\tSource Register(s) and/or Immediate: ${srcRegs}`
+    `\tOperation: ${opCode}\n\tDestination Register: ${destReg}
+    \tSource Register(s) and/or Immediate: ${srcRegs.join(", ")}`
   );
   // If all checks pass, the instruction is valid
   return true;
 }
 
+// provides registers without the comma or bracket notations
 function cleanSourceRegisters(regs: Array<string>): Array<string> {
   return regs.map((reg) => {
     if (reg.includes("[")) {

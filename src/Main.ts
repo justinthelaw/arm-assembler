@@ -3,6 +3,7 @@ import OptionsInterface from "./OptionsInterface";
 import ProgramInterface from "./ProgramInterface";
 import CommandInterface from "./CommandInterface";
 import InstructionConversion from "./InstructionConversion";
+import binaryToHex from "./binaryToHex";
 import { ERROR, FLAGS } from "./ConstantsRules";
 
 // some console welcome messages
@@ -61,11 +62,15 @@ if (inputObject[FLAGS[2]] || inputObject[FLAGS[3]]) {
   const instruction = (
     inputObject[FLAGS[0]] || inputObject[FLAGS[1]]
   ).toUpperCase();
+
+  // use converter on instruction
+  const convertedResult = InstructionConversion(instruction);
+
   // print out result from conversion, or error
   console.log(
-    `=> Resulting machine code:\n\t${
-      InstructionConversion(instruction) || ERROR
-    }`
+    `=> Resulting machine code:
+    \tBinary Representation: ${convertedResult || ERROR}
+    \tHexadecimal Representation: ${binaryToHex(convertedResult) || ERROR}`
   );
   // if none of the above, output error and end
 } else {

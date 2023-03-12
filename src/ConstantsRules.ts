@@ -1,4 +1,11 @@
-export const validOperations = [
+// these are in pairs
+export const FLAGS = ["i", "instruction", "m", "machineCode"];
+
+// default user error message
+// blames all errors on user input being formatted incorrectly
+export const ERROR = "User input is incorrect!";
+
+export const VALID_OPERATIONS = [
   "AND",
   "EOR",
   "ORR",
@@ -17,7 +24,7 @@ export const validOperations = [
   "LDR",
 ];
 
-export const validRegisters = [
+export const VALID_REGISTERS = [
   "R0",
   "R1",
   "R2",
@@ -34,20 +41,20 @@ export const validRegisters = [
 ];
 
 // includes A and S as appropriate
-export const opMachineCodes = new Map<string, string>();
-opMachineCodes.set("AND", "0000");
-opMachineCodes.set("EOR", "0001");
-opMachineCodes.set("ORR", "1100");
-opMachineCodes.set("ADD", "0100");
-opMachineCodes.set("SUB", "0010");
-opMachineCodes.set("LSL", "1101");
-opMachineCodes.set("LSR", "1101");
-opMachineCodes.set("ASR", "1101");
-opMachineCodes.set("ROR", "1101");
-opMachineCodes.set("RSB", "0011");
-opMachineCodes.set("MOV", "1101");
-opMachineCodes.set("MVN", "1111");
-opMachineCodes.set("MUL", "00000000");
-opMachineCodes.set("MLA", "00000010");
-opMachineCodes.set("LDR", "0101");
-opMachineCodes.set("STR", "0111");
+export const OP_MACHINECODES = new Map<string, string>();
+OP_MACHINECODES.set("AND", "0000");
+OP_MACHINECODES.set("EOR", "0001");
+OP_MACHINECODES.set("ORR", "1100");
+OP_MACHINECODES.set("ADD", "0100");
+OP_MACHINECODES.set("SUB", "0010");
+OP_MACHINECODES.set("LSL", "1101");
+OP_MACHINECODES.set("LSR", "1101");
+OP_MACHINECODES.set("ASR", "1101");
+OP_MACHINECODES.set("ROR", "1101");
+OP_MACHINECODES.set("RSB", "0011");
+OP_MACHINECODES.set("MOV", "1101");
+OP_MACHINECODES.set("MVN", "1111");
+OP_MACHINECODES.set("MUL", "00000000");
+OP_MACHINECODES.set("MLA", "00000010");
+OP_MACHINECODES.set("LDR", "0101");
+OP_MACHINECODES.set("STR", "0111");

@@ -2,14 +2,13 @@ import HandleUserInput from "./HandleUserInput";
 import OptionsInterface from "./OptionsInterface";
 import ProgramInterface from "./ProgramInterface";
 import CommandInterface from "./CommandInterface";
-import InstructionConversion, { ERROR } from "./InstructionConversion";
+import InstructionConversion from "./InstructionConversion";
+import { ERROR, FLAGS } from "./ConstantsRules";
 
 // some console welcome messages
 console.log("\nWelcome to the mock ARM Assembly and Disassembly Program!");
 console.log("Written by Justin Law (https://www.github.com/justinthelaw)\n");
 console.log("=> PROGRAM MESSAGES START BELOW");
-
-const FLAGS = ["i", "instruction", "m", "machineCode"];
 
 // object for storing options for the command
 const OPTIONS: OptionsInterface[] = [
@@ -72,5 +71,9 @@ if (inputObject[FLAGS[2]] || inputObject[FLAGS[3]]) {
 } else {
   throw new Error(ERROR);
 }
-console.log(`\nThank you for using the mock ARM Assembly and Disassembly Program!`);
+
+// some console closing messages
+console.log(
+  `\nThank you for using the mock ARM Assembly and Disassembly Program!`
+);
 console.log("Written by Justin Law (https://www.github.com/justinthelaw)\n");

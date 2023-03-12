@@ -1,12 +1,9 @@
 import {
-  validOperations,
-  validRegisters,
-  opMachineCodes,
+  VALID_OPERATIONS,
+  VALID_REGISTERS,
+  OP_MACHINECODES,
+  ERROR
 } from "./ConstantsRules";
-
-// default error message for incorrect input
-// may accidentally hide program edge case errors too haha
-export const ERROR = "User input is incorrect!";
 
 // stores operation
 let opCode = "";
@@ -74,7 +71,7 @@ function checkOpAndTypeCode(): string {
   // check the op code based on Map<string, string>
   // note 1: includes S values
   // note 2: MUL and MLA include Op Type and Op Code, A and S
-  result += opMachineCodes.get(opCode);
+  result += OP_MACHINECODES.get(opCode);
 
   // check if load or store code
   if (opCode === "LDR") {
@@ -95,7 +92,7 @@ function isArmInstruction(instruction: string): boolean {
 
   // Check that the first part is a valid operation
   opCode = parts[0];
-  if (!validOperations.includes(opCode)) {
+  if (!VALID_OPERATIONS.includes(opCode)) {
     return false;
   }
 
@@ -106,7 +103,7 @@ function isArmInstruction(instruction: string): boolean {
 
   // first register identified in the instruction
   destReg = parts[1].substring(0, 2);
-  if (!validRegisters.includes(destReg)) {
+  if (!VALID_REGISTERS.includes(destReg)) {
     return false;
   }
 
@@ -116,7 +113,7 @@ function isArmInstruction(instruction: string): boolean {
   for (const register of srcRegs) {
     let r = register;
     // check for register or immediate
-    if (!validRegisters.includes(r) && !r.includes("#")) {
+    if (!VALID_REGISTERS.includes(r) && !r.includes("#")) {
       return false;
     }
     // immediates should only be in the last term

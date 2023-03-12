@@ -4,7 +4,7 @@ import {
   OP_MACHINECODES,
   ERROR,
 } from "./constantsRules";
-import checkRegsImm from "./checkRegsImm";
+import { checkForImm, checkRegsImm } from "./checkRegsImm";
 
 // stores operation
 let opCode = "";
@@ -24,6 +24,7 @@ export default function instructionConversion(instruction: string): string {
 
   // see individual function for descriptions
   let result: string = checkOpAndTypeCode();
+  // TODO: correct the checkRegsImm function, see the file
   result += checkRegsImm(opCode, srcRegs, destReg);
 
   // transforms binary machine code answer to hexadecimal representation
@@ -72,16 +73,6 @@ function checkOpAndTypeCode(): string {
   }
 
   return result;
-}
-
-// check the source registers for an immediate
-function checkForImm(regs: Array<string>): boolean {
-  for (let i = 0; i < regs.length; i++) {
-    if (regs[i].includes("#")) {
-      return true;
-    }
-  }
-  return false;
 }
 
 // takes in an all uppercase string and determines if it is

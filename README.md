@@ -66,6 +66,17 @@ e5902004 ldr r2, [r0, #4]
 e7821003 str r1, [r2, r3]
 ```
 
+To run the tests, for to the `Test.ts` file and modify the code according to the comments. Then, execute the following:
+
+```bash
+# TypeScript compile in watch mode
+npm run dev
+# run the tests file contents
+node ./src/Test.js
+```
+
 ## Disclaimer
 
 The current program cannot perform machine code to ARM assembly instruction conversion (disassembly) yet; therefore, the `-m --machine-code <string>` options are stubs and will only echo the user-input option.
+
+This program is incomplete and I may come back one day to complete this. For now, please take a look at the code and feel free to provide issues or pull requests. Thank you!

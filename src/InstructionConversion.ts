@@ -2,8 +2,9 @@ import {
   VALID_OPERATIONS,
   VALID_REGISTERS,
   OP_MACHINECODES,
-  ERROR
+  ERROR,
 } from "./ConstantsRules";
+import toHexadecimal from "./toHexadecimal";
 
 // stores operation
 let opCode = "";
@@ -26,10 +27,6 @@ export default function InstructionConversion(instruction: string): string {
 
   // transforms binary machine code answer to hexadecimal representation
   return toHexadecimal(result);
-}
-
-function toHexadecimal(code: string): string {
-  return code;
 }
 
 // adds Rn, Rd, Rt, Rm, Scaled Register, and Operand2 format

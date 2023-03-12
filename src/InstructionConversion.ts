@@ -24,13 +24,25 @@ export default function InstructionConversion(instruction: string): string {
     throw new Error(ERROR);
   }
 
+  // see individual function for descriptions
+  const result = checkOpAndTypeCode() + checkRegistersAndImmediates();
+
+  // transforms binary machine code answer to hexadecimal representation
+  return toHexadecimal(result);
+}
+
+function toHexadecimal(code: string): string {
+  return code;
+}
+
+// adds Rn, Rd, Rt, Rm, Scaled Register, and Operand2 format
+function checkRegistersAndImmediates(): string {
   let result = "";
-  // adds Cond Code, Op Type, Op Code, and S or L/S code
-  result += checkOpAndTypeCode();
 
   return result;
 }
 
+// adds Cond Code, Op Type, Op Code, A and S or L/S code
 function checkOpAndTypeCode(): string {
   // adds the 0b prefix and condition code
   // always defaults to assumption of 0b1110
@@ -45,7 +57,31 @@ function checkOpAndTypeCode(): string {
     }
   }
 
+  // check if data operation uses immediate or register
+  if (
+    opCode !== "LDR" &&
+    opCode !== "STR" &&
+    opCode !== "MUL" &&
+    opCode !== "MLA"
+  ) {
+    if (srcRegs.includes("#")) {
+      result += "001";
+    } else {
+      result += "000";
+    }
+  }
+
+  // check the op code based on Map<string, string>
+  // note 1: includes S values
+  // note 2: MUL and MLA include Op Type and Op Code, A and S
   result += opMachineCodes.get(opCode);
+
+  // check if load or store code
+  if (opCode === "LDR") {
+    result += "0";
+  } else if (opCode === "STR") {
+    result += "1";
+  }
 
   return result;
 }

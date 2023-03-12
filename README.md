@@ -20,7 +20,7 @@ This is a mock ARM instruction assembler written in TypeScript. This exercise se
 
 - TypeScript was chosen as a way to practice using the syntax of the language for my own professional development, although I could have comfortably done this in Java or Kotlin
 - Each class/function file handles a different aspect of the ARM Assembly conversion to machine code, to include operations like user input handling and binary to hexadecimal conversions
-- Most of the rules are implemented as key-value pair objects for easy switch-based referencing
+- Most of the rules are implemented as key-value pair objects or arrays in a Constants file for consistent/easy importing and referencing
 - Command line arguments are parsed using a library named commander.js
 
 ## Usage
@@ -42,6 +42,7 @@ node ./src/Main.js convert -i "mov r1, r2"
 ```
 
 If you want a hot-reload dev environment, you can execute the following instead of `npm run build`:
+
 ```bash
 # compile the TypeScript files into JavaScript
 # adds watch mode option for live change reloads/builds
@@ -64,6 +65,7 @@ e5921000 ldr r1, [r2]
 e5902004 ldr r2, [r0, #4]
 e7821003 str r1, [r2, r3]
 ```
+
 ## Disclaimer
 
 The current program cannot perform machine code to ARM assembly instruction conversion (disassembly) yet; therefore, the `-m --machine-code <string>` options are stubs and will only echo the user-input option.

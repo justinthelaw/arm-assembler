@@ -21,3 +21,5 @@ export default function binaryToHex(binary: string): string {
 
   return hex;
 }
+// test for this func
+console.log(binaryToHex("11100001101000000001000000000010"));

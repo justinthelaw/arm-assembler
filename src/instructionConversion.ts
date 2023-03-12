@@ -24,7 +24,7 @@ export default function instructionConversion(instruction: string): string {
 
   // see individual function for descriptions
   let result: string = checkOpAndTypeCode();
-  // result += checkRegsImm(opCode, srcRegs, destReg);
+  result += checkRegsImm(opCode, srcRegs, destReg);
 
   // transforms binary machine code answer to hexadecimal representation
   return result;

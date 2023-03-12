@@ -1,49 +1,12 @@
 import HandleUserInput from "./HandleUserInput";
-import OptionsInterface from "./OptionsInterface";
-import ProgramInterface from "./ProgramInterface";
-import CommandInterface from "./CommandInterface";
-import InstructionConversion from "./InstructionConversion";
+import instructionConversion from "./instructionConversion";
 import binaryToHex from "./binaryToHex";
-import { ERROR, FLAGS } from "./ConstantsRules";
+import { ERROR, FLAGS, PROGRAM, COMMANDS } from "./constantsRules";
 
 // some console welcome messages
 console.log("\nWelcome to the mock ARM Assembly and Disassembly Program!");
 console.log("Written by Justin Law (https://www.github.com/justinthelaw)\n");
 console.log("=> PROGRAM MESSAGES START BELOW");
-
-// object for storing options for the command
-const OPTIONS: OptionsInterface[] = [
-  // generate the ARM assembly instruction conversion option
-  {
-    name: "arm assembly instruction",
-    flags: [`-${FLAGS[0]}`, `--${FLAGS[1]}`],
-    description: "flag prior to inputting ARM assembly instruction",
-    required: false,
-  },
-  // generate the Mmachine code conversion option
-  {
-    name: "machine code",
-    flags: [`-${FLAGS[2]}`, `--${FLAGS[3]}`],
-    description: "flag prior to inputting machine code.",
-    required: false,
-  },
-];
-// object for storing the commands in the program
-const COMMANDS: CommandInterface[] = [
-  {
-    name: "convert",
-    description:
-      "assemble or disassemble ARM assembly instructions and associated machine codes",
-    options: OPTIONS,
-  },
-];
-
-// object for storing program attributes, same as package.json
-const PROGRAM: ProgramInterface = {
-  name: "node ./src/Main.js",
-  version: "1.0.0",
-  description: "Mock ARM assembly instruction to machine code translator",
-};
 
 // instantiate the user input handler for use
 const handler = new HandleUserInput(PROGRAM, COMMANDS);
@@ -64,13 +27,14 @@ if (inputObject[FLAGS[2]] || inputObject[FLAGS[3]]) {
   ).toUpperCase();
 
   // use converter on instruction
-  const convertedResult = InstructionConversion(instruction);
+  const convertedResult: string = instructionConversion(instruction);
 
   // print out result from conversion, or error
+  // provides binary and hexadecimal representation
   console.log(
     `=> Resulting machine code:
-    \tBinary Representation: ${convertedResult || ERROR}
-    \tHexadecimal Representation: ${binaryToHex(convertedResult) || ERROR}`
+    \tBinary: ${convertedResult || ERROR}
+    \tHexadecimal: ${binaryToHex(convertedResult) || ERROR}`
   );
   // if none of the above, output error and end
 } else {

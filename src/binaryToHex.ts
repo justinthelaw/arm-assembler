@@ -1,6 +1,10 @@
+// takes in a binary string prefixed with 0b, or not
+// then converts to hexadecimal
 export default function binaryToHex(binary: string): string {
   // Remove the "0b" prefix from the binary string
-  binary = binary.slice(2);
+  if (binary.includes("0b")) {
+    binary = binary.slice(2);
+  }
 
   // Pad the binary string with leading zeros if necessary
   while (binary.length % 4 !== 0) {
@@ -15,6 +19,5 @@ export default function binaryToHex(binary: string): string {
     hex += digit;
   }
 
-  // Add the "0x" prefix to the hexadecimal string
-  return "0x" + hex.toUpperCase();
+  return hex;
 }

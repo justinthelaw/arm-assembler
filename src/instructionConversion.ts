@@ -3,8 +3,8 @@ import {
   VALID_REGISTERS,
   OP_MACHINECODES,
   ERROR,
-} from "./ConstantsRules";
-import toHexadecimal from "./toHexadecimal";
+} from "./constantsRules";
+import checkRegsImm from "./checkRegsImm";
 
 // stores operation
 let opCode = "";
@@ -13,7 +13,7 @@ let destReg = "";
 // stores source registers
 let srcRegs: Array<string> = [];
 
-export default function InstructionConversion(instruction: string): string {
+export default function instructionConversion(instruction: string): string {
   console.log(
     `=> Converting the following ARM assembly instruction to machine code:\n\t${instruction}`
   );
@@ -23,16 +23,10 @@ export default function InstructionConversion(instruction: string): string {
   }
 
   // see individual function for descriptions
-  const result = checkOpAndTypeCode() + checkRegistersAndImmediates();
+  let result: string = checkOpAndTypeCode();
+  // result += checkRegsImm(opCode, srcRegs, destReg);
 
   // transforms binary machine code answer to hexadecimal representation
-  return toHexadecimal(result);
-}
-
-// adds Rn, Rd, Rt, Rm, Scaled Register, and Operand2 format
-function checkRegistersAndImmediates(): string {
-  let result = "";
-
   return result;
 }
 
@@ -44,7 +38,7 @@ function checkOpAndTypeCode(): string {
 
   // check if LDR/STR uses immediate or register
   if (opCode === "LDR" || opCode === "STR") {
-    if (srcRegs.includes("#")) {
+    if (checkForImm(srcRegs)) {
       result += "010";
     } else {
       result += "011";
@@ -58,7 +52,7 @@ function checkOpAndTypeCode(): string {
     opCode !== "MUL" &&
     opCode !== "MLA"
   ) {
-    if (srcRegs.includes("#")) {
+    if (checkForImm(srcRegs)) {
       result += "001";
     } else {
       result += "000";
@@ -78,6 +72,17 @@ function checkOpAndTypeCode(): string {
   }
 
   return result;
+}
+
+// check the source registers for an immediate
+function checkForImm(regs: Array<string>): boolean {
+  for (let i = 0; i < regs.length; i++) {
+    console.log(regs[i]);
+    if (regs[i].includes("#")) {
+      return true;
+    }
+  }
+  return false;
 }
 
 // takes in an all uppercase string and determines if it is

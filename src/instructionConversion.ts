@@ -77,7 +77,6 @@ function checkOpAndTypeCode(): string {
 // check the source registers for an immediate
 function checkForImm(regs: Array<string>): boolean {
   for (let i = 0; i < regs.length; i++) {
-    console.log(regs[i]);
     if (regs[i].includes("#")) {
       return true;
     }

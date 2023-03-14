@@ -66,7 +66,7 @@ e5902004 ldr r2, [r0, #4]
 e7821003 str r1, [r2, r3]
 ```
 
-To run the tests, for to the `Test.ts` file and modify the code according to the comments. Then, execute the following:
+To run the tests, go to the `Test.ts` file and modify the code according to the comments. Then, execute the following:
 
 ```bash
 # TypeScript compile in watch mode
